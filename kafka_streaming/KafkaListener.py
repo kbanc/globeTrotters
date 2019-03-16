@@ -2,7 +2,7 @@
 Katherine Bancroft 2019-03-17
 Hack the Globe
 
-Code from https://www.bmc.com/blogs/working-streaming-twitter-data-using-kafka/
+Code from https://www.bmc.com/blogs/working-streaming-twitter-data-using-kafka
 """
 
 from tweepy.streaming import StreamListener
@@ -15,18 +15,35 @@ access_token_secret = "ejlLIysq37M4BNdSOehF0DeNqh5rXavHloOHxPsGpVyOV"
 consumer_key =  "wlowJoiOGQCmzQPlAvkXjFDK7"
 consumer_secret =  "8LcVYjHoT2jfbtYYGgOCml3bbSzcwAGjvlEBpc27Qw44aZZIhi"
 
-class KafkaListener(StreamListener):
+class KafkaProducer(StreamListener):
+    def __init__(self, topic, producer):
+        self._topic = topic
+        self._producer = producer
+
     def on_data(self, data):
-        producer.send_messages("naturaldisaster", data.encode('utf-8'))
-        print (data)
+        print(data)
+        self._producer.send_messages(self._topic, data.encode('utf-8'))
         return True
+    
+    def on_status(self, status):
+        print(status.text)
+
     def on_error(self, status):
-        print (status)
+        if status == 420:
+            return False
 
 kafka = KafkaClient("localhost:9092")
-producer = SimpleProducer(kafka)
-l = KafkaListener()
+listener = KafkaProducer('naturaldisaster', SimpleProducer(kafka))
+
 auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
-stream = Stream(auth, l)
-stream.filter(track="naturaldisaster")
+
+stream = Stream(auth, listener)
+stream.filter(track=[
+    "natural disaster", 
+    'hurricane',
+    'tornado',
+    'flood',
+    'fire',
+    'earthquake',
+    'tsunami'])#streams all tweets containing 'naturaldisaster' - this may not be tracking correctly
