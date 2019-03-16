@@ -28,11 +28,8 @@ class Consumer(object):
     
     def send_data_to_api(self): 
         for message in self._consumer:
-            print('message!!!', message)
             message = self._convert_message_to_db_form(message.value)
-            print('formatted message', message)
             post_request = self._post_to_api(message)
-            print('API POST status', post_request.status_code)
              
     def _post_to_api(self, message):
         return requests.post(
@@ -63,7 +60,11 @@ class Consumer(object):
 
         return formatted_message
 
+def run_consumer():
+    consumer = Consumer().subscribe('naturaldisaster')
+    consumer.send_data_to_api()
 
+run_consumer()
 
 
         
