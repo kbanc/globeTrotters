@@ -11,8 +11,7 @@ let ReportSchema = new Schema({
         data: {type: String},
         date: {type: Date, default: Date.now}
     },
-    disaster: {type: String, required: true}, //disaster_type = flood/hurricane
-    datatype: {type: String, required: true}, // image or twitter
+    datatype: {type: String}, // image or twitter
     processed: {type: Boolean, default: false}
 });
 
