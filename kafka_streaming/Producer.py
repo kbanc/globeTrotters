@@ -15,7 +15,7 @@ access_token_secret = "ejlLIysq37M4BNdSOehF0DeNqh5rXavHloOHxPsGpVyOV"
 consumer_key =  "wlowJoiOGQCmzQPlAvkXjFDK7"
 consumer_secret =  "8LcVYjHoT2jfbtYYGgOCml3bbSzcwAGjvlEBpc27Qw44aZZIhi"
 
-class KafkaProducer(StreamListener):
+class Producer(StreamListener):
     def __init__(self, topic, producer):
         self._topic = topic
         self._producer = producer
@@ -33,7 +33,7 @@ class KafkaProducer(StreamListener):
             return False
 
 kafka = KafkaClient("localhost:9092")
-listener = KafkaProducer('naturaldisaster', SimpleProducer(kafka))
+listener = Producer('naturaldisaster', SimpleProducer(kafka))
 
 auth = OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
