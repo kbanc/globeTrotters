@@ -4,13 +4,12 @@ Hack the Globe
 
 Takes data from KafkaConsumer and pushes to mongoDB
 """
-
 import requests
 from kafka import KafkaConsumer
 from json import loads
 
 
-class Consumer(self):
+class Consumer(object):
 
     def __init__(self):
         self._consumer = KafkaConsumer(
@@ -20,13 +19,18 @@ class Consumer(self):
         )
         
     def subscribe(self, topic):
+        print('consumer is subsribed')
         self._consumer.subscribe(topic)
         return self
     
-    def send_data_to_api(self):
-        collection = self._client.twitter_data
+    def get_subscriptors(self):
+        return self._consumer.subscription()
+    
+    def send_data_to_api(self): 
         for message in self._consumer:
+            print('message!!!', message)
             message = self._convert_message_to_db_form(message.value)
+            print('formatted message', message)
             post_request = self._post_to_api(message)
             print('API POST status', post_request.status_code)
              
@@ -37,9 +41,9 @@ class Consumer(self):
             )
     
     def _convert_message_to_db_form(self, raw_message):
-        #disaster data will be added after processing 
         coordinates = raw_message.get('coordinates', None)
         place = raw_message.get('place', None)
+        longitude, latitude, location_name = None, None, None
 
         if coordinates:
             longitude, latitude = coordinates
@@ -47,20 +51,19 @@ class Consumer(self):
         if place:
             location_name = place['name']
 
-        formatted_message = {}
-        formatted_message['tweet'] = raw_message['text']
-        formatted_message['metadata'] = {
-            'logitude': longitude,
+        formatted_message = {
+            'tweet': raw_message['text'],
+            'longitude': longitude,
             'latitude': latitude,
             'location': location_name,
-            'date': raw_message['created_at']
+            'date': raw_message['created_at'],
+            'datatype':     'tweet'
         }
-        formatted_message['datatype'] = 'tweet'
+
 
         return formatted_message
 
-consumer = Consumer().subscribe('naturaldisaster')
-consumer.send_data_to_api()
+
 
 
         
