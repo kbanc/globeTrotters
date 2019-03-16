@@ -10,8 +10,10 @@ let GoodReportSchema = new Schema({
         data: {type: String},
         date: {type: Date, default: Date.now},
     },
-    disaster: {type: String, required: true}, //disaster_type = flood/hurricane
-    datatype: {type: String, required: true} // image or twitter
+    disaster: {type: String}, //disaster_type = flood/hurricane
+    datatype: {type: String}, // image or twitter
+    scene_context: [{type: String}],
+    severity: {type: Number}
 });
 
 module.exports = mongoose.model('GoodReport', GoodReportSchema);
