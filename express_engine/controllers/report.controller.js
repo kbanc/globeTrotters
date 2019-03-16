@@ -56,6 +56,8 @@ exports.create_good_report = function(req, res, next){
         },
         disaster: req.body.disaster,
         datatype: req.body.datatype,
+        scene_context: req.body.scene_context,
+        severity: req.body.severity
     });
 
     myReport.save(function(err) {
@@ -78,7 +80,6 @@ exports.create_raw_report = function(req, res, next){
           data: req.body.data,
           date: req.body.date
       },
-      disaster: req.body.disaster,
       datatype: req.body.datatype,
   });
 
