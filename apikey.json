@@ -1,0 +1,18 @@
+{
+  "type": "service_account",
+  "project_id": "lexical-period-234721",
+  "private_key_id": "23c754da35d3273cca024076a076e58585b2f2bb",
+  "private_key": "-----BEGIN PRIVATE 
+KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDcy15DzHkiGo0w\n7lPw4l05gI6G7YfLMcaXN/H4ZvTWYiPOtlxGrenj0/K2cPp9o/E/f3QhztlZN02U\nAsROq/T6gBZGMPkqmTlhSVgKFLSQCDpdadd+9LlW+98m+8yDr+hyIDrYCA9HH/QW\nBiphCPd6E/k5cMH185LfcxqxCC57IM6c+0jaaEjOyHkLDu9J7tUCBBLfu5PhX6rq\nRGZtZk1wOKTLPF8/CfkpDjURceVLprFLm/rSOQ8uVCvcfgILpyzYswGAHkq+ipT7\nnKD41YdjUhMOOEnjr/N0kDE3XsL/VkaJEiiU/jx8gl0fGoNWbD884yg/Ep33U4Go\nSFqQaFuXAgMBAAECggEAALuWDQCNOF1BMbPgyHBf4dR45J6+MCDyqUbQwUPKNTnv\nJ3z4cm2aVJy79foLAsa8ArtwDbqrgv3Jfp/BugcdEYXCTSpVcVw/0gBVz/bAoKe+\nVdgHlI7IXK8KTw1P4PIBAfv0ZgokztYez8Hmexr2A0w0rAmhQykzSBWQNZ0y1krE\ngI2uDuaKzgqmNF45E1C3PeLUINKjzk8vNiuRr1hk6IyUMgZjWEYyqTPdsfnDpL1b\n79V1FjN2Oy75nXklxz28n0d7BwMZ4dse3quIbZ6uETnZIaCqbrXrzTMnOwCwd203\nAc3+FqWFTIvs1cHtQqoMswpbZmvg8ec5Mj3DN6/bFQKBgQD2BKoMPheiQh+yQjJB\ncCLZDcqbcfE+TXZrWfs/dd9+XJOEz64N6sstUAJNUReeWNx4enPE8eQfr7Rj87A1\n1C6+fRz1YFgqL0ldHllxThovAlKpZ6thhsNfSG3nof33Js7EodoMJ/sIyQc8rFh/\nz3wMOiSAXXJ2Q4RWMsXORyHFHQKBgQDlwLW9Zg3oXQtbEVVjp25YOsMo+rdZwdNy\n70sWluslELerVhZqcZ7Mja+hUSw7wx4rpI4dj6Y6pv0Ad4BoTTo116PPhEHWdVtv\nbiY72IIKN+bdBrc1mk0UUwdMV63tQRHiZSjviSHeSd/mj0lZV34wjPoqM7AzuqxU\nsiystqbJQwKBgDsRPZ643cXIaIHNIPHTMZq5k/akcc6KnK8DqK5A58sYARc3IcwX\nnnafqh3UJX6QSUbn55nWlfYBoqcI4DrcWejEc0p6ulBOkCe6XLE2llTJEv23dU9y\nIsBizHh7zVUkzSoqzgZzJvOiCInJu2nccCUjZJYpWY0JguGLSTDQpUwFAoGAd0G6\nlF8+5Ng3JsQukJW+HyoRV1ochgioG0a+sTERSaIN1G/RHttvVDpPaerajQLQzFKU\nOh/wZw160h01l+5OQth1/SdnjUxJc+O3EOVnSqqNuTjdLIO1ctFOPoBclYRrJhrg\nTsXdwKaUA/doWWmi5MyopfNCiPdisGvz6Iq+tEUCgYB+s761kysAzvdX+QmLiDYt\n3Q9z4mCAEoN8OxrMTUR8+T2bjK57AAOxA8O5/Rwb7IyDUGG3CnGA++lbg312Gjpe\nm3xj2qqaGKomawKOlrx/xUfAPtPpL3Ni2E5909hB41B9u+e0aHmv54Tiq2VEe0IU\nkzyWMnmq5yaO+2c8AIvcHg==\n-----END 
+PRIVATE KEY-----\n",
+  "client_email": 
+"htgimage@lexical-period-234721.iam.gserviceaccount.com",
+  "client_id": "107134864621573854418",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": 
+"https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": 
+"https://www.googleapis.com/robot/v1/metadata/x509/htgimage%40lexical-period-234721.iam.gserviceaccount.com"
+}
+

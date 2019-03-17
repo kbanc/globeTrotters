@@ -1,2 +1,4 @@
 .idea*
 .pyc*
+*.h5*
+*.lock*
