@@ -6,6 +6,7 @@
     "@material-ui/core": "^3.9.2",
     "axios": "^0.18.0",
     "fetch-progress": "^1.0.2",
+    "google-maps-react": "^2.0.2",
     "material-ui": "^0.20.2",
     "node-fetch": "^2.3.0",
     "node-fetch-progress": "^1.0.2",

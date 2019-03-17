@@ -6,7 +6,8 @@ import AppBar from 'material-ui/AppBar';
 import FontIcon from 'material-ui/FontIcon';
 import {blue500} from 'material-ui/styles/colors';
 import UploadScreen from './uploadscreen';
-import LoginScreen from './loginscreen'
+import LoginScreen from './loginscreen';
+import Mapcontainer from './weathermaps';
 
 
 class UploadPage extends Component{
@@ -34,6 +35,11 @@ class UploadPage extends Component{
                 let currentScreen=[];
                 currentScreen.push(<UploadScreen appContext={this.props.appContext}/>);
                 this.setState({currentScreen});
+                break;
+            case "openmaps":
+                let mapsPage=[];
+                mapsPage.push(<Mapcontainer appContext={this.props.appContext}/>);
+                this.props.appContext.setState({loginPage:[],uploadScreen:[], mapScreen: mapsPage});
                 break;
             case "logout":
                 let loginPage =[];
@@ -67,6 +73,9 @@ class UploadPage extends Component{
                             </MenuItem>
                             <MenuItem onClick={(event) => this.handleMenuClick(event,"openprint")}>
                                 Upload Page
+                            </MenuItem>
+                            <MenuItem onClick={(event) => this.handleMenuClick(event, "openmaps")}>
+                                Maps Page
                             </MenuItem>
                             <MenuItem onClick={(event) => this.handleMenuClick(event,"logout")}>
                                 Logout
