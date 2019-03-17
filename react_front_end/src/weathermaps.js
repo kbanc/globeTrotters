@@ -23,12 +23,6 @@ export class MapContainer extends Component {
         }
     }
 
-    componentDidMount(){
-        let currentScreen=[];
-        currentScreen.push(<MapContainer appContext={this.props.appContext}/>);
-        this.setState({currentScreen})
-    }
-
     toggleDrawer(){
         console.log("this has been clicked");
         this.setState({draweropen: !this.state.draweropen})
@@ -63,6 +57,7 @@ export class MapContainer extends Component {
         });
 
     onClose = props => {
+        console.log(this.state.selectedPlace.name);
         if (this.state.showingInfoWindow) {
             this.setState({
                 showingInfoWindow: false,
@@ -105,14 +100,16 @@ export class MapContainer extends Component {
                     </Drawer>
                 </MuiThemeProvider>
                 <CurrentLocation centerAroundCurrentLocation google={this.props.google}>
-                    <Marker onClick={this.onMarkerClick} name={'current location'} />
+                    <Marker onClick={this.onMarkerClick} name={'Downtown, Toronto, ON'} />
                     <InfoWindow
                         marker={this.state.activeMarker}
                         visible={this.state.showingInfoWindow}
                         onClose={this.onClose}
                     >
                         <div>
-                            <h4>{this.state.selectedPlace.name}</h4>
+                            <h4>Location: {this.state.selectedPlace.name}</h4>
+                            <h4>Latitude: 43°38'52.5"N </h4>
+                            <h4>Longitude: 79°22'08.7"W </h4>
                         </div>
                     </InfoWindow>
                 </CurrentLocation>
