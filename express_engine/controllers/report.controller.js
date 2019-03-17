@@ -88,7 +88,16 @@ exports.get_all_raw_data = function(req, res, next){
     try{
         Report.find({}, (err, data) => {
             if (err) throw err;
-            res.send(data);
+            let my_arr = [];
+            if (Boolean(req.param.processed) === false){
+                for (let i=0; i < data.length; i++){
+                    my_arr.push(data[i]);
+                }
+                res.send(my_arr);
+            }
+            else{
+                res.send(data);
+            }
         })
     }catch (e) {
         console.log("Could not get raw data with error: ", e);
