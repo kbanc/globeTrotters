@@ -49,25 +49,22 @@ export class MapContainer extends Component {
                 this.setState({draweropen: false})
         }
     }
-    onMarkerClick = (props, marker, e) =>
-        this.setState({
-            selectedPlace: props,
-            activeMarker: marker,
-            showingInfoWindow: true
-        });
+    onMarkerClick = (props, marker, e) =>{
+                    this.setState({
+                        selectedPlace: props,
+                        activeMarker: marker,
+                        showingInfoWindow: true
+                    });
+                };
 
     onClose = props => {
-        console.log(this.state.selectedPlace.name);
         if (this.state.showingInfoWindow) {
             this.setState({
-                showingInfoWindow: false,
-                activeMarker: null
+                showingInfoWindow: false
             });
         }
     };
     render() {
-        console.log("Maps container");
-
         return (
             <div className="Mapcontainer">
                 <MuiThemeProvider>
@@ -100,16 +97,16 @@ export class MapContainer extends Component {
                     </Drawer>
                 </MuiThemeProvider>
                 <CurrentLocation centerAroundCurrentLocation google={this.props.google}>
-                    <Marker onClick={this.onMarkerClick} name={'Downtown, Toronto, ON'} />
+                    <Marker onClick={this.onMarkerClick} />
                     <InfoWindow
                         marker={this.state.activeMarker}
                         visible={this.state.showingInfoWindow}
                         onClose={this.onClose}
                     >
                         <div>
-                            <h4>Location: {this.state.selectedPlace.name}</h4>
-                            <h4>Latitude: 43°38'52.5"N </h4>
-                            <h4>Longitude: 79°22'08.7"W </h4>
+                            <h4>Location: Downtown, Toronto, ON</h4>
+                            <h4>Latitude: 43.647885</h4>
+                            <h4>Longitude: -79.369067</h4>
                         </div>
                     </InfoWindow>
                 </CurrentLocation>
