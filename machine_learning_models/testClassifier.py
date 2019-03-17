@@ -34,11 +34,7 @@ def load_trained_model():
     HEIGHT = 300
     WIDTH = 300
     BATCH_SIZE = 32
-<<<<<<< HEAD
     class_list = ["avalanche", "flood", "forest_fire"]
-=======
-    class_list = ["avalanche", "flood", "forrest_fire"]
->>>>>>> 983ad6bbb701f8f8465c8344d002deee629597e8
     FC_LAYERS = [1024, 1024]
     dropout = 0.5
     base_model = ResNet50(weights='imagenet', 
@@ -68,7 +64,7 @@ def model_predict_image(image_path, model):
     resized_image = cv2.resize(im, (300, 300)) 
     tr_img_data = np.expand_dims(resized_image, axis=0) 
     prediction = model.predict(tr_img_data)
-    print(class_list[np.argmax(prediction)])
+    print('!!!!!!!!!!!!!!!!!!!!!!!!', class_list[np.argmax(prediction)])
     return class_list[np.argmax(prediction)]
 
 def test_model():
@@ -87,7 +83,7 @@ def test_model():
 
 def run_model_on_one_image(url):
     model = load_trained_model()
-    return model_predict(url, model, 'who_cares')
+    return model_predict_image(url, model, 'who_cares')
 
 if __name__ == "__main__":
     test_model()

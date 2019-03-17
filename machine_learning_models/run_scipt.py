@@ -26,9 +26,11 @@ class ProcessImages(object):
     def process_and_send_image_data(self):  
         raw_image_data = self._get_raw_data()
         for image_content in raw_image_data.json():
+            print('CONTENT', image_content)
             self._update_raw_data(image_content)
-            disaster_type_prediction = run_model_on_one_image(image_content['image'])
-            processed_image = self._construct_good_message(image, disaster_type_prediction)
+            filename = self._download_image_locally(image_content['image'])
+            disaster_type_prediction = run_model_on_one_image(filename)
+            processed_image = self._construct_good_message(image_content, disaster_type_prediction)
             self._post_to_processed_db(processed_image)
     
     def _post_to_processed_db(self, message):
@@ -40,6 +42,15 @@ class ProcessImages(object):
     def _construct_good_message(self, message, disaster_type_prediction):
         message['disaster'] = disaster_type_prediction
         return message
+    
+    def _download_image_locally(self, message_url):
+        import urllib.request
+        from uuid import uuid4
+        file_name = str(uuid4())+'.jpg'
+
+        urllib.request.urlretrieve(message_url, file_name)
+        return file_name
+
 
 class ProcessTweets(object):
         
