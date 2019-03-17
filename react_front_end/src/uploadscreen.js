@@ -51,7 +51,7 @@ class Uploadscreen extends Component{
             data: '',
             date: '',
             location: '',
-            datatype: '',
+            datatype: 'image',
             file: '',
             filepreview: '',
             image_component: image_component,
