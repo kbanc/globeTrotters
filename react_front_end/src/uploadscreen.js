@@ -1,126 +1,143 @@
 import React, { Component } from 'react';
 import './App.css';
-import Loginscreen from './loginscreen';
+import logo from './logo.svg';
+import cloud from './cloud.svg';
+import {ListItem} from 'material-ui/List';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Input from '@material-ui/core/Input';
 import RaisedButton from 'material-ui/RaisedButton';
-//import FontIcon from 'material-ui/FontIcon';
-//import {blue500} from 'material-ui/styles/colors';
+import {blue500} from 'material-ui/styles/colors';
 
 import fetch from 'node-fetch';
 
 const api_base_url= "http://localhost:8888/reports";
-const converter_api = "https://api2.online-convert.com";
-const api_key = "046dc7982b5c86ad78ac55cf76e0f31d";
 
 class Uploadscreen extends Component{
     constructor(props){
         super(props);
+        let load_image = [];
+        load_image.push(
+            <img src={cloud} alt=""/>
+        );
         this.state = {
-            longitude: 'someval',
-            latitude: 'someval',
-            data: 'someval',
-            location: 'someval',
-            datatype: 'image',
-            selectedFile: null,
-            loaded: 0,
+            longitude: '',
+            latitude: '',
+            data: '',
+            date: '',
+            location: '',
+            datatype: '',
+            file: '',
+            filepreview: '',
+            loadingImage: load_image,
             draweropen:false,
-            printcount:10,
             printingmessage:'',
             printButtonDisabled:false
         }
     }
 
-    handleUpload = async function (my_data){
-        //console.log(my_data);
-        /*
-        let converter_url = converter_api+'/jobs';
-        await fetch(converter_url,
-            {
-                method: 'POST',
-                headers: {
-                    "X-Oc-Api-Key": api_key,
-                    "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": '*'
-                },
-                body: JSON.stringify({
-                        input: [{
-                            type: "remote",
-                            source: my_data[0].name,
-                        }],
-                        conversion: [{
-                            target: "svg"
-                        }]
+    handleUpload = event => {
+        let load_image = [];
+        load_image.push(
+            <img src={logo} alt=""/>)
+        ;
+
+        this.setState({
+            loadingImage: load_image,
+            printingmessage:"Please wait till your file is being uploaded",
+            printButtonDisabled:true}
+            );
+
+        if (this.state.file !== ''){
+            let api_url = api_base_url+'/create_raw_report';
+            fetch(api_url,
+                {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Access-Control-Allow-Origin": '*'
+                    },
+                    body: JSON.stringify({
+                            image: this.state.file,
+                            tweet: null,
+                            longitude: this.state.longitude,
+                            latitude: this.state.latitude,
+                            data: this.state.data,
+                            datatype: this.state.datatype,
+                            location: this.state.location,
+                        }
+                    ),
+                }).then(data => {
+                    if (data["status"] === 200){
+                        let load_image = [];
+                        load_image.push(
+                            <img src={cloud} alt=""/>)
+                        ;
+                        setTimeout(() => {
+                            this.setState({
+                                loadingImage: load_image,
+                                printingmessage:"Upload completed. Try Another One",
+                                printButtonDisabled:false
+                            });}, 1500);
                     }
-                )
-            })
-            .then(async data => {
-                let api_url = api_base_url+'/create_raw_report'
-                console.log(data["output"]);
-                await fetch(api_url,
-                    {
-                        method: 'POST',
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Access-Control-Allow-Origin": '*'
-                        },
-                        body: JSON.stringify({
-                                image: data["output"],
-                                tweet: null,
-                                longitude: this.state.longitude,
-                                latitude: this.state.latitude,
-                                data: this.state.data,
-                                datatype: this.state.datatype,
-                                location: this.state.location,
-                            }
-                        )
-                    }).then(my_response =>{
-                    console.log(my_response);
-                })
-            })
-            */
+
+            });
+        }else{
+            alert("Please choose a file first");
+        }
     };
 
 
-    handleFile = event => {
+    handleFile = async event => {
+        let reader = new FileReader();
+        let me = this;
+        reader.readAsDataURL(event.target.files[0]);
+        reader.onload = function () {
+            let fileContent = reader.result;
+            me.setState({
+                file: fileContent,
+            })
+        };
+        let filepreview = [];
+        filepreview.push(
+            <MuiThemeProvider>
+                <ListItem>
+                    {event.target.files[0].name}
+                </ListItem>
+            </MuiThemeProvider>
+        )
+
         this.setState({
-            selectedFile: event.target.files[0],
-            loaded: 0,
-        })
+            filepreview: filepreview,
+            data: event.target.files[0].name,
+            date: event.target.files[0].lastModifiedDate,
+        });
     };
 
     handleDivClick(event){
         // console.log("event",event);
         if(this.state.draweropen){
-            this.setState({draweropen:false})
+            this.setState({draweropen: false})
         }
-    }
-
-    handleLogout(event){
-        // console.log("logout event fired",this.props);
-        let loginPage =[];
-        loginPage.push(<Loginscreen appContext={this.props.appContext}/>);
-        this.props.appContext.setState({loginPage:loginPage,uploadScreen:[]})
     }
 
     render() {
             return(
                 <div className="Uploadscreen">
                     <div onClick={(event) => this.handleDivClick(event)}>
-                        <div>
-                            You can upload upto {this.state.printcount} files
-                        </div>
+                        <MuiThemeProvider>
+                            <Input type="file" color={blue500} name="Upload Image" onChange={this.handleFile} />
+                            <RaisedButton disabled={this.state.printButtonDisabled} label="Upload" primary={true} style={style} onClick={this.handleUpload}/>
+                        </MuiThemeProvider>
+                    </div>
 
-                        <div>
-                            <input type="file" name="" id="" onChange={this.handleFile} />
-                            <MuiThemeProvider>
-                                <RaisedButton disabled={this.state.printButtonDisabled} label="Upload" primary={true} style={style} onClick={this.handleUpload}/>
-                            </MuiThemeProvider>
-                            <div> {this.state.loaded} %</div>
-                        </div>
-                        <div>
-                            {this.state.printingmessage}
-                        </div>
-
+                    <div>
+                        {this.state.filepreview}
+                    </div>
+                    <div>
+                        {this.state.printingmessage}
+                    </div>
+                    <div>
+                        {this.state.loadingImage}
                     </div>
                 </div>
             )

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg'; If we want to have a rendering logo
 import './App.css';
 import Loginscreen from './loginscreen';
 

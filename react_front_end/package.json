@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^3.9.2",
     "axios": "^0.18.0",
+    "fetch-progress": "^1.0.2",
     "material-ui": "^0.20.2",
     "node-fetch": "^2.3.0",
+    "node-fetch-progress": "^1.0.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-dropzone": "^10.0.4",
