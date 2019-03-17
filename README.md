@@ -6,6 +6,8 @@ There are 5 main components to this project.
 To run each, please follow these instructions. 
 
 1. Twitter API - Kafka
+
+
   - to get this working, run the producer.py and the consumer.py in seperate terminal windows. 
   
 2. ExpressJS app
@@ -27,4 +29,6 @@ To run each, please follow these instructions.
 **you need GCP credentials
 
 5. MongoDB
+
+
 Set up a mongoDB instance
