@@ -44,11 +44,8 @@ def run_producer():
     stream = Stream(auth, listener)
     stream.filter(track=[
         "natural disaster", 
-        'hurricane',
-        'tornado',
         'flood',
         'fire',
-        'earthquake',
-        'tsunami'])#streams all tweets containing 'naturaldisaster' - this may not be tracking correctly
+        'avalanche'])#streams all tweets containing 'naturaldisaster' - this may not be tracking correctly
 
 run_producer()
