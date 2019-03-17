@@ -8,6 +8,9 @@ exports.test =  function (req, res) {
 
 exports.create_user = async function (req, res, next){
        let newUser = User({
+           firstname: req.body.firstname,
+           lastname: req.body.lastname,
+           email: req.body.email,
            username: req.body.username,
            password: req.body.password
        });
@@ -43,10 +46,12 @@ async function search_user(name, password, res){
                     });
                     return;
                 }
-                res.send( {
+                let return_val = {
                     "code":200,
                     "success":"login successful"
-                });
+                };
+                console.log(return_val);
+                res.send(return_val);
                 return;
             })
             .catch(err =>{
@@ -145,6 +150,7 @@ exports.create_raw_report = function(req, res, next){
 
   myReport.save(function(err) {
       if (err){
+          console.log(err);
           return next(err);
       }
       res.send('Created an entry in the raw database');
