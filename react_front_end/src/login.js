@@ -85,8 +85,8 @@ class Login extends Component {
                 self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen})
             }
             else if (my_data["code"] === 204){
-                console.log("Username password do not match");
-                alert(my_data.data.success)
+                console.log("Username & password do not match");
+                alert(my_data["success"])
             }
             else{
                 console.log(my_data["code"]);

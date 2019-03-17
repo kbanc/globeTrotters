@@ -9,6 +9,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import {blue500} from 'material-ui/styles/colors';
 
 import fetch from 'node-fetch';
+import TextField from 'material-ui/TextField';
 
 const api_base_url= "http://localhost:8888/reports";
 
@@ -19,6 +20,31 @@ class Uploadscreen extends Component{
         load_image.push(
             <img src={cloud} alt=""/>
         );
+        let image_component=[];
+        image_component.push(
+            <MuiThemeProvider>
+                <div>
+                    <TextField
+                        hintText="Longitude"
+                        defaultValue=""
+                        onChange = {(event,newValue)=>this.setState({longitude:newValue})}
+                    />
+                    <br/>
+                    <TextField
+                        hintText="Latitude"
+                        defaultValue=""
+                        onChange = {(event,newValue) => this.setState({latitude:newValue})}
+                    />
+                    <br/>
+                    <TextField
+                        hintText="Location"
+                        defaultValue=""
+                        onChange = {(event,newValue) => this.setState({location:newValue})}
+                    />
+                    <br/>
+                </div>
+            </MuiThemeProvider>
+        );
         this.state = {
             longitude: '',
             latitude: '',
@@ -28,6 +54,7 @@ class Uploadscreen extends Component{
             datatype: '',
             file: '',
             filepreview: '',
+            image_component: image_component,
             loadingImage: load_image,
             draweropen:false,
             printingmessage:'',
@@ -37,11 +64,13 @@ class Uploadscreen extends Component{
 
     handleUpload = event => {
         let load_image = [];
+        let image_component = [];
         load_image.push(
             <img src={logo} alt=""/>)
         ;
 
         this.setState({
+            image_component: image_component,
             loadingImage: load_image,
             printingmessage:"Please wait till your file is being uploaded",
             printButtonDisabled:true}
@@ -69,11 +98,37 @@ class Uploadscreen extends Component{
                 }).then(data => {
                     if (data["status"] === 200){
                         let load_image = [];
+                        let image_component=[];
+                        image_component.push(
+                            <MuiThemeProvider>
+                                <div>
+                                    <TextField
+                                        hintText="Longitude"
+                                        defaultValue=""
+                                        onChange = {(event,newValue)=>this.setState({longitude:newValue})}
+                                    />
+                                    <br/>
+                                    <TextField
+                                        hintText="Latitude"
+                                        defaultValue=""
+                                        onChange = {(event,newValue) => this.setState({latitude:newValue})}
+                                    />
+                                    <br/>
+                                    <TextField
+                                        hintText="Location"
+                                        defaultValue=""
+                                        onChange = {(event,newValue) => this.setState({location:newValue})}
+                                    />
+                                    <br/>
+                                </div>
+                            </MuiThemeProvider>
+                        );
                         load_image.push(
                             <img src={cloud} alt=""/>)
                         ;
                         setTimeout(() => {
                             this.setState({
+                                image_component: image_component,
                                 loadingImage: load_image,
                                 printingmessage:"Upload completed. Try Another One",
                                 printButtonDisabled:false
@@ -103,6 +158,7 @@ class Uploadscreen extends Component{
                 <ListItem>
                     {event.target.files[0].name}
                 </ListItem>
+                <RaisedButton disabled={this.state.printButtonDisabled} label="Upload" primary={true} style={style} onClick={this.handleUpload}/>
             </MuiThemeProvider>
         )
 
@@ -123,13 +179,14 @@ class Uploadscreen extends Component{
     render() {
             return(
                 <div className="Uploadscreen">
+                    <br/><br/><br/>
                     <div onClick={(event) => this.handleDivClick(event)}>
                         <MuiThemeProvider>
                             <Input type="file" color={blue500} name="Upload Image" onChange={this.handleFile} />
-                            <RaisedButton disabled={this.state.printButtonDisabled} label="Upload" primary={true} style={style} onClick={this.handleUpload}/>
+                            <br/><br/>
+                            {this.state.image_component}
                         </MuiThemeProvider>
                     </div>
-
                     <div>
                         {this.state.filepreview}
                     </div>
