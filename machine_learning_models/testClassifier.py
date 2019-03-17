@@ -64,7 +64,6 @@ def model_predict_image(image_path, model):
     resized_image = cv2.resize(im, (300, 300)) 
     tr_img_data = np.expand_dims(resized_image, axis=0) 
     prediction = model.predict(tr_img_data)
-    print('!!!!!!!!!!!!!!!!!!!!!!!!', class_list[np.argmax(prediction)])
     return class_list[np.argmax(prediction)]
 
 def test_model():
@@ -83,7 +82,7 @@ def test_model():
 
 def run_model_on_one_image(url):
     model = load_trained_model()
-    return model_predict_image(url, model, 'who_cares')
+    return model_predict_image(url, model)
 
 if __name__ == "__main__":
     test_model()

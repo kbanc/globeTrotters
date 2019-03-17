@@ -27,7 +27,6 @@ class ProcessImages(object):
     def process_and_send_image_data(self):  
         raw_image_data = self._get_raw_data()
         for image_content in raw_image_data.json():
-            print('CONTENT', image_content)
             self._update_raw_data(image_content)
             filename = self._download_image_locally(image_content['image'])
             disaster_type_prediction = run_model_on_one_image(filename)
@@ -40,7 +39,7 @@ class ProcessImages(object):
             'http://localhost:8888/reports/create_good_report',
             data=message
         )
-        
+
     def _construct_good_message(self, message, disaster_type_prediction, severity_prediction):
         message['disaster'] = disaster_type_prediction
         message['severity'] = severity_prediction

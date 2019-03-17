@@ -65,7 +65,6 @@ class ImageSceneContext:
 def main(): 
     filename = 'severe.png'
     scene_context = ImageSceneContext("fire")
-    print(scene_context.get_scene_context(filename))
     return
 
 if __name__ == "__main__":
