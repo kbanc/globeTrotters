@@ -34,7 +34,11 @@ def load_trained_model():
     HEIGHT = 300
     WIDTH = 300
     BATCH_SIZE = 32
+<<<<<<< HEAD
     class_list = ["avalanche", "flood", "forest_fire"]
+=======
+    class_list = ["avalanche", "flood", "forrest_fire"]
+>>>>>>> 983ad6bbb701f8f8465c8344d002deee629597e8
     FC_LAYERS = [1024, 1024]
     dropout = 0.5
     base_model = ResNet50(weights='imagenet', 
