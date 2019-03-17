@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
-
+import teamLogo from './team_logo.svg';
 import Login from './login';
 import Register from './register';
 
@@ -35,7 +35,7 @@ class Loginscreen extends Component{
     componentWillMount(){
         let loginscreen=[];
         loginscreen.push(<Login parentContext={this} appContext={this.props.appContext}/>);
-        let loginmessage = "Not registered yet, Register Now";
+        let loginmessage = "Not registered yet? Register Now !!!";
         this.setState({
             loginscreen:loginscreen,
             loginmessage:loginmessage
@@ -46,7 +46,7 @@ class Loginscreen extends Component{
         if(this.state.isLogin){
             let loginscreen=[];
             loginscreen.push(<Register parentContext={this} appContext={this.props.appContext}/>);
-            loginmessage = "Already registered. Go to Login";
+            loginmessage = "Already registered? Go to Login";
             let loginButtons=[];
             loginButtons.push(
                 <div key="login-button">
@@ -76,7 +76,7 @@ class Loginscreen extends Component{
                 </div>
             )
             loginscreen.push(<Login parentContext={this} appContext={this.props.appContext}/>);
-            loginmessage = "Not Registered yet. Go to registration";
+            loginmessage = "Not Registered yet? Registration Now !!!";
             this.setState({
                 loginscreen:loginscreen,
                 loginmessage:loginmessage,
@@ -94,6 +94,8 @@ class Loginscreen extends Component{
                     {this.state.loginmessage}
                     {this.state.loginButtons}
                 </div>
+                <br/>
+                <img src={teamLogo} alt=""/>
             </div>
         );
     }

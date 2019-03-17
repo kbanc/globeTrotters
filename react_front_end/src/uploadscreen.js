@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import logo from './logo.svg';
 import cloud from './cloud.svg';
+import teamLogo from './team_logo.svg';
 import {ListItem} from 'material-ui/List';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Input from '@material-ui/core/Input';
@@ -196,6 +197,7 @@ class Uploadscreen extends Component{
                     <div>
                         {this.state.loadingImage}
                     </div>
+                    <img src={teamLogo} alt=""/>
                 </div>
             )
     }
