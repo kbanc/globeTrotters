@@ -46,6 +46,8 @@ def run_producer():
         "natural disaster", 
         'flood',
         'fire',
-        'avalanche'])#streams all tweets containing 'naturaldisaster' - this may not be tracking correctly
+        'avalanche',
+        'wildfire',
+        'forest fire'])#streams all tweets containing 'naturaldisaster' - this may not be tracking correctly
 
 run_producer()
