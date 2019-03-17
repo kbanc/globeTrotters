@@ -83,6 +83,22 @@ exports.update_raw_data = function (req, res, next){
         return next(e);
     }
 };
+exports.get_all_raw_tweet = function(req, res, next){
+    try{
+        Report.find({}, (err, data) => {
+            if (err) throw err;
+            let my_arr = [];
+            for (let i=0; i < data.length; i++){
+                if (data[i]["datatype"] === "tweet"){{
+                    my_arr.push(data[i]);
+                }}
+            }
+            res.send(my_arr);
+        })
+    }catch (e) {
+        console.error("Could not get all the tweets: ", e);
+    }
+};
 
 exports.get_all_raw_data = function(req, res, next){
     try{
