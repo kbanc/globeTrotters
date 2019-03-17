@@ -7,6 +7,7 @@ let GoodReportSchema = new Schema({
     metadata: {
         longitude: {type: String},
         latitude: {type: String},
+        location: {type: String},
         data: {type: String},
         date: {type: Date, default: Date.now},
     },
