@@ -14,7 +14,7 @@ let GoodReportSchema = new Schema({
     disaster: {type: String}, //disaster_type = flood/hurricane
     datatype: {type: String}, // image or twitter
     scene_context: [{type: String}],
-    severity: {type: Number}
+    severity: {type: String}
 });
 
 module.exports = mongoose.model('GoodReport', GoodReportSchema);

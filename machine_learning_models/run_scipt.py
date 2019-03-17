@@ -7,6 +7,7 @@ Hack the Globe
 
 import requests
 from testClassifier import run_model_on_one_image
+from imageSceneContext import ImageSceneContext
 
 class ProcessImages(object):
 
@@ -30,6 +31,7 @@ class ProcessImages(object):
             self._update_raw_data(image_content)
             filename = self._download_image_locally(image_content['image'])
             disaster_type_prediction = run_model_on_one_image(filename)
+            severity_prediction = self._get_image_scene_prediction(filename, disaster_type_prediction)
             processed_image = self._construct_good_message(image_content, disaster_type_prediction)
             self._post_to_processed_db(processed_image)
     
@@ -38,9 +40,10 @@ class ProcessImages(object):
             'http://localhost:8888/reports/create_good_report',
             data=message
         )
-    
-    def _construct_good_message(self, message, disaster_type_prediction):
+        
+    def _construct_good_message(self, message, disaster_type_prediction, severity_prediction):
         message['disaster'] = disaster_type_prediction
+        message['severity'] = severity_prediction
         return message
     
     def _download_image_locally(self, message_url):
@@ -50,6 +53,10 @@ class ProcessImages(object):
 
         urllib.request.urlretrieve(message_url, file_name)
         return file_name
+    
+    def _get_image_scene_prediction(self, filename, disaster_type):
+        image_scene_context = ImageSceneContext(disaster_type)
+        return image_scene_context.get_scene_context(filename)
 
 
 class ProcessTweets(object):
@@ -85,5 +92,5 @@ class ProcessTweets(object):
 image_processor = ProcessImages()
 image_processor.process_and_send_image_data()
 
-# tweet_processor = ProcessTweets()
-# tweet_processor.process_and_send_image_data()
+tweet_processor = ProcessTweets()
+tweet_processor.process_and_send_image_data()
