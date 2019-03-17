@@ -11,14 +11,14 @@ class ImageSceneContext:
         self.disaster_type = disaster
         return
 
-    def get_scene_context(self):
+    def get_scene_context(self, filename_path):
         # Instantiates a client
         client = vision.ImageAnnotatorClient()
 
         all_labels = {}
 
-        filename = 'severe_2.png'
-        corpus_file_name = 'severe_2.txt'
+        filename = filename_path
+        corpus_file_name = 'severe.txt'
         # Loads the image into memory
         with io.open(filename, 'rb') as image_file:
             content = image_file.read()
@@ -37,7 +37,7 @@ class ImageSceneContext:
             file.write(json.dumps(s))
         
         # Ideally run the image through a classifier, but for now assume text file
-        if self.disaster_type == "forest_fire":
+        if self.disaster_type == "fire":
             s = open('corpus/forest_fire_words.txt', 'r').read()
         elif self.disaster_type == "avalanche":
             s = open('corpus/avalanche_words.txt', 'r').read()
@@ -60,11 +60,12 @@ class ImageSceneContext:
         score = 0
         for key, value in img.items():
             score += value * top_words[key]
-        return((1/score)*2)
+        return(str((1/score)*2))
 
 def main(): 
-    scene_context = ImageSceneContext("forest_fire")
-    print(scene_context.get_scene_context())
+    filename = 'severe.png'
+    scene_context = ImageSceneContext("fire")
+    print(scene_context.get_scene_context(filename))
     return
 
 if __name__ == "__main__":
