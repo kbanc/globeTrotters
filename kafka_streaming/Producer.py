@@ -26,14 +26,14 @@ class Producer(StreamListener):
 
 def run_producer():
 
-    access_token = "1633719781-e035OTEcEkiCFD2FzP7Kymsig4gVsSnyXmzKAqz"
-    access_token_secret = "ejlLIysq37M4BNdSOehF0DeNqh5rXavHloOHxPsGpVyOV" 
-    consumer_key =  "wlowJoiOGQCmzQPlAvkXjFDK7"
-    consumer_secret =  "8LcVYjHoT2jfbtYYGgOCml3bbSzcwAGjvlEBpc27Qw44aZZIhi"
+    access_token = ""
+    access_token_secret = "" 
+    consumer_key =  ""
+    consumer_secret =  ""
 
     from kafka import SimpleProducer, KafkaClient
     from tweepy import OAuthHandler
-    from tweepy import Stream
+    from tweepy import Streame035OTEcEkiCFD2FzP7Kymsig4gVsSnyXmzKAqz
 
     kafka = KafkaClient("localhost:9092")
     listener = Producer('naturaldisaster', SimpleProducer(kafka))
