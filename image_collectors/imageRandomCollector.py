@@ -12,7 +12,7 @@ num_words = len(content)
 
 # maximum number of results for a given search and (2) the group size
 # for results (maximum of 50 per request)
-API_KEY = "47500502d0d8446c82b6c2adec6db5b7"
+API_KEY = ""
  
 # set the endpoint API URL
 URL = "https://api.cognitive.microsoft.com/bing/v7.0/images/search"
